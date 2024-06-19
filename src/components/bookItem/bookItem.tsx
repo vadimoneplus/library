@@ -9,7 +9,6 @@ interface IBookItem {
 }
 
 export const BookItem = ({ book }: IBookItem) => {
- 
   return (
     <div key={book.id} className='linkItem__wrapper'>
       <Link className='linkItem' to={`book/${book.id}`}>

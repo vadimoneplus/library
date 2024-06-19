@@ -12,7 +12,7 @@ export const Book = observer(() => {
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const disabledButton = !!book?.dateTake
-  const disabledButtonTake = new Date().getHours() >= 23
+  const disabledButtonTake = new Date().getHours() >= 16
   
   const showModal = () => {
     setIsModalOpen(true);

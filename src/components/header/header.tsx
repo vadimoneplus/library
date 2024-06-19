@@ -10,7 +10,6 @@ export const Header = observer(() => {
   useEffect(() => {
     store.searchBooks(value)
   }, [debouncedValue])
-
   const reservedBooks = store.getReservedBooks()
 
   return (

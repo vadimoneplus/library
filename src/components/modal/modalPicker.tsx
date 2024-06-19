@@ -13,15 +13,12 @@ interface IModalPicker {
 }
 
 export const ModalPicker = ({ book, isModalOpen, handleOk, handleCancel, startDate, setStartDate }: IModalPicker) => {
-  const startDateHandle=(date:Date|null)=>{
-if(date){
-  const now = new Date()
-  const date2 = (new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 0, 0, 0).getTime())
-   setStartDate(date)
-}
-   
-
+  const startDateHandle = (date: Date | null) => {
+    if (date) {
+      setStartDate(date)
+    }
   }
+
   return (
     <ConfigProvider
       theme={{
