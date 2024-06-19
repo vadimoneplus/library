@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import store from '../store/store';
 
-
-export const CountDown = ({ id, hours = 0, minutes = 0, seconds = 0 }: {
+interface ICountDown {
   id: number
   hours?: number
   minutes?: number
   seconds?: number
-}) => {
+}
 
+export const CountDown = ({ id, hours = 0, minutes = 0, seconds = 0 }: ICountDown) => {
   const [[h, m, s], setTime] = useState([hours, minutes, seconds]);
   const [over, setOver] = useState(false);
-
   const tick = () => {
     if (over) {
       store.returnBook(id)
@@ -28,7 +27,6 @@ export const CountDown = ({ id, hours = 0, minutes = 0, seconds = 0 }: {
       setTime([h, m, s - 1]);
     }
   };
-
 
   useEffect(() => {
     const timerID = setInterval(() => tick(), 1000);

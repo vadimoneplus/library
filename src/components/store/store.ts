@@ -2,9 +2,7 @@ import { makeAutoObservable } from "mobx"
 import img from '../../images/book.jpeg'
 import { IBook } from "../../models";
 
-
 class Store {
-
   data: IBook[] = [
     {
       id: 1,
@@ -95,7 +93,6 @@ class Store {
       image: img,
       dateTake: null
     },
-
   ]
 
   searchText = ''
@@ -103,8 +100,8 @@ class Store {
   constructor() {
     makeAutoObservable(this)
   }
-  
-  takeBook(id: number, dateTake: any) {
+
+  takeBook(id: number, dateTake: Date) {
     this.data = this.data.map(element => element.id === id ? { ...element, dateTake: dateTake.getTime() } : element)
   }
 
@@ -114,6 +111,18 @@ class Store {
 
   searchBooks(searchText: string) {
     this.searchText = searchText
+  }
+
+  getBookbyId(id: number) {
+    return this.data.find(book => book.id === id)
+  }
+
+  getReservedBooks() {
+    return this.data.filter(book => book.dateTake).length
+  }
+
+  getBooksBySearchFilter(){
+    return this.data.filter(({ author, title }) => author.toLowerCase().includes(this.searchText.toLowerCase()) || title.toLowerCase().includes(this.searchText.toLowerCase()))
   }
 
 }

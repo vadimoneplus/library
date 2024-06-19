@@ -4,5 +4,5 @@ export interface IBook {
   title: string
   description: string
   image: string
-  dateTake: string | null | number
+  dateTake: null | number
 }
