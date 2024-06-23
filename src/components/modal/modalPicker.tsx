@@ -38,7 +38,13 @@ export const ModalPicker = ({ book, isModalOpen, handleOk, handleCancel, startDa
                 <label htmlFor='label'>
                   <BsCalendar4Week className="pickerLabel" />
                 </label>
-                <DatePicker className='picker' dateFormat='dd.MM.yyyy' id='label' selected={startDate} onChange={(date) => startDateHandle(date)} />
+                <DatePicker
+                  className='picker'
+                  minDate={new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1)}
+                  dateFormat='dd.MM.yyyy'
+                  id='label'
+                  selected={startDate}
+                  onChange={(date) => startDateHandle(date)} />
                 <label htmlFor='label'>
                   <BsCalendar4 className="pickerIcon" />
                 </label>

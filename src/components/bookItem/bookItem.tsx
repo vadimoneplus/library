@@ -1,14 +1,24 @@
 import { Link } from "react-router-dom";
 import { IBook } from "../../models";
-import { CountDown } from "../timer/timer";
-import { restTime } from "../../utils/utils";
+import { getRestTime } from "../../utils/utils";
 import store from "../store/store";
+import { useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
 
 interface IBookItem {
   book: IBook
 }
 
-export const BookItem = ({ book }: IBookItem) => {
+export const BookItem = observer(({ book }: IBookItem) => {
+  const [restTime, setRestTime] = useState('')
+  useEffect(() => {
+    const timerID = setInterval(() => {
+      setRestTime(() => getRestTime(book.dateTake))
+    }, 1000);
+    return () => clearInterval(timerID);
+  }, []);
+console.log('reader');
+
   return (
     <div key={book.id} className='linkItem__wrapper'>
       <Link className='linkItem' to={`book/${book.id}`}>
@@ -20,11 +30,7 @@ export const BookItem = ({ book }: IBookItem) => {
       </Link>
       {book.dateTake && <div className='textReturn'>
         <p>До возврата:</p>
-        {<CountDown
-          id={book.id}
-          hours={restTime(+book.dateTake, 'h')}
-          minutes={restTime(+book.dateTake, 'm')}
-          seconds={restTime(+book.dateTake, 's')} />}
+        {restTime}
       </div>
       }
       <button
@@ -34,5 +40,5 @@ export const BookItem = ({ book }: IBookItem) => {
       </button>
     </div>
   );
-};
+});
 

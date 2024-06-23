@@ -9,10 +9,10 @@ export const Book = observer(() => {
   const nav = useNavigate()
   const id = Number(useParams().id)
   const book = store.getBookbyId(id)
-  const [startDate, setStartDate] = useState<Date>(new Date());
+  const [startDate, setStartDate] = useState(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1, 0, 0, new Date().getSeconds()));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const disabledButton = !!book?.dateTake
-  const disabledButtonTake = new Date().getHours() >= 16
+  const disabledButtonTake = new Date().getHours() >= 24
   
   const showModal = () => {
     setIsModalOpen(true);
@@ -36,6 +36,7 @@ export const Book = observer(() => {
   const handleBack = () => {
     nav(-1)
   }
+  console.log(startDate);
 
   return (
     <div className="container">
